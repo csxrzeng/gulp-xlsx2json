@@ -1,22 +1,23 @@
-# gulp-excel2json
+# gulp-xlsx2json
 > Excel (XLSX/XLS) to json.
-
+> If there is a headRow specified, export each line to an object.
+> Otherwise export each line to an array.
 
 ## Usage
-First, install `gulp-excel2json` as a development dependency:
+First, install `gulp-xlsx2json` as a development dependency:
 
 ```shell
-> npm install --save-dev gulp-excel2json
+> npm install --save-dev gulp-xlsx2json
 ```
 
 Then, add it to your `gulpfile.js`:
 
 ```javascript
-var excel2json = require('gulp-excel2json');
+var xlsx2json = require('gulp-xlsx2json');
 
 gulp.task('copy', function() {
     gulp.src('config/**.xlsx')
-        .pipe(excel2json({
+        .pipe(xlsx2json({
             headRow: 1,
             valueRowStart: 3,
             trace: true
@@ -28,7 +29,7 @@ gulp.task('copy', function() {
 
 ## API
 
-### excel2json([options])
+### xlsx2json([options])
 
 #### options.headRow
 Type: `number`

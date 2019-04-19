@@ -1,11 +1,11 @@
 {
-  "name": "gulp-excel2json",
+  "name": "gulp-xlsx2json",
   "version": "1.0.5",
   "description": "Excel (XLSX/XLS) to json",
   "main": "index.js",
    "repository": {
     "type": "git",
-    "url": "git+https://github.com/chrisbing/gulp-excel2json.git"
+    "url": "git+https://github.com/csxrzeng/gulp-xlsx2json.git"
   },
   "files": [
     "index.js"
@@ -17,7 +17,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "keywords": [
     "gulp",
@@ -29,7 +29,7 @@
     "email": "bingyuwuhen@gmail.com"
   },
   "license": "MIT",
-  "_id": "gulp-excel2json@1.0.2",
+  "_id": "gulp-xlsx2json@1.0.2",
   "_shasum": "0a429c6d99c0a3d8c7c39304b4bc5ee1361dda1f",
-  "_from": "gulp-excel2json@*"
+  "_from": "gulp-xlsx2json@*"
 }

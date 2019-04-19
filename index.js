@@ -50,6 +50,39 @@ var toJson = function (fileName, headRow, valueRow) {
     return json;
 };
 
+var toArray = function (fileName, valueRow) {
+    var workbook;
+    if (typeof fileName === 'string') {
+        workbook = XLSX.readFile(fileName);
+    } else {
+        workbook = fileName;
+    }
+
+    var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+    var json = [];
+    for (var key in worksheet) {
+        if (worksheet.hasOwnProperty(key)) {
+            var cell = worksheet[key];
+            var match = /([A-Z]+)(\d+)/.exec(key);
+            if (!match) {
+                continue;
+            }
+            var col = match[1]; // ABCD
+            var row = match[2]; // 1234
+            var value = cell.v;
+
+            if (row < valueRow) {
+                //continue;
+            } else {
+                if (col == "A") {
+                    json[row] = [];
+                }
+                json[row].push(value);
+            }
+        }
+    }
+    return json.slice(valueRow);
+};
 
 module.exports = function (options) {
     options = options || {};
@@ -69,8 +102,11 @@ module.exports = function (options) {
         var bString = arr.join("");
 
         /* Call XLSX */
-        var workbook = XLSX.read(bString, {type: "binary"});
-        file.contents = new Buffer(JSON.stringify(toJson(workbook, options.headRow || 1, options.valueRowStart || 2)));
+        var workbook = XLSX.read(bString, { type: "binary" });
+        if (!options.headRow)
+            file.contents = Buffer.from(JSON.stringify(toArray(workbook, options.valueRowStart || 1)));
+        else
+            file.contents = Buffer.from(JSON.stringify(toJson(workbook, options.headRow || 1, options.valueRowStart || 2)));
 
         if (options.trace) {
             console.log("convert file :" + file.path);
